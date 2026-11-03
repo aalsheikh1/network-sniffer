@@ -1,8 +1,13 @@
-from scapy.all import sniff
+from scapy.all import IP, sniff
 
 
 def handle_packet(packet):
-    print(packet.summary())
+    if IP not in packet:
+        return
+
+    src = packet[IP].src
+    dst = packet[IP].dst
+    print(f"{src} -> {dst}")
 
 
 def main():
